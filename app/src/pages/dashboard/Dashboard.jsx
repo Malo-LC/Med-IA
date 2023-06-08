@@ -3,7 +3,7 @@ import React from 'react';
 function Dashboard() {
   return (
     <div className="w-screen h-screen flex flex-row">
-        <div className="flex flex-col bg-[#080957] h-full w-64 text-white">
+        <div className="flex flex-col bg-[#080957] h-full w-2/5 text-white">
           <div className="ml-2 mt-2">
           <h1 className="font-bold"> Med'IA </h1>
   
@@ -16,17 +16,17 @@ function Dashboard() {
         </div>
         <div className="flex flex-col w-full h-full ">
           <h1 className="ml-10 font-bold">Welcome M. Johnsson</h1>
-          <div className="bg-[#D9D9D9] w-96 h-60 rounded-md ml-10 mt-10">
+          <div className="bg-[#D9D9D9] w-2/3 h-1/4 rounded-md ml-10 mt-10">
             <h1 className="ml-2 mt-2 font-bold">History</h1>
           </div>
           <div className="flex flex-row">
-            <div className="bg-[#D9D9D9] w-96 h-60 rounded-md ml-10 mt-10 justify-center items-center">
+            <div className="bg-[#D9D9D9] w-2/5 h-5/6 rounded-md ml-10 mt-10 justify-center items-center">
               <h1 className="ml-2 mt-2 font-bold">Last features used</h1>
               <button className="bg-[#4c4b4b] text-white rounded-lg justify-center items-center ">
                 <p className="ml-2 mr-2">Pneumonia Detection</p>
               </button>
             </div>
-            <div className="bg-[#D9D9D9] w-96 h-60 rounded-md ml-10 mt-10 justify-center items-center">
+            <div className="bg-[#D9D9D9] w-2/5 h-5/6 rounded-md ml-10 mt-10 justify-center items-center truncate">
               <div className="ml-5">
               <h1 className="mt-2 font-bold">Agenda</h1>
   
