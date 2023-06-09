@@ -39,17 +39,6 @@ const App = () => {
 const NavBar = () => {
   return (
     <div className="w-full">
-      <div className="flex overflow-hidden my-2 px-4 w-full items-center justify-between">
-        <>
-          <Link className="border border-black p-1" to="/search">
-            Recherche
-          </Link>
-          <Link className="border border-black p-1" to="/account">
-            Mon compte
-          </Link>
-        </>
-      </div>
-
       <Outlet />
     </div>
   );

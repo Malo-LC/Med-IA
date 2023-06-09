@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../../redux/actions/auth";
 import API from "../../API";
-import "./Login.css";
+import logo from "../../assets/logo.png";
 
 function Login() {
   const [isLoginForm, setIsLoginForm] = useState(true);
@@ -46,47 +46,49 @@ function Login() {
   };
 
   return (
-    <div className="Login">
-      <div className="top-of-page">
-        <div className="logo-homepage"></div>
+    <div className="flex items-center justify-center flex-col">
+      <div className="flex overflow-hidden  px-4 w-full items-center justify-center bg-[#080957]">
+        <img className="h-48" src={logo} alt="logo" />
       </div>
 
-      <div className="button-container">{isLoginForm ? <button onClick={handleReturnToLogin}>Sign up</button> : <button onClick={handleReturnToLogin}>Sign in</button>}</div>
-
-      <form onSubmit={isLoginForm ? handleLogin : handleSignUp}>
+      <div className="my-5">
         {isLoginForm ? (
-          <div>
-            <div>
-              <input id="email" placeholder="Email" type="email" required />
-            </div>
-            <div>
-              <input id="password" placeholder="Password" type="password" required />
-            </div>
-          </div>
+          <button className="bg-[#7577CD] p-1 rounded text-white" onClick={handleReturnToLogin}>
+            Sign up
+          </button>
         ) : (
-          <div>
-            <div>
-              <input id="firstName" placeholder="First Name" type="text" required />
-            </div>
-            <div>
-              <input id="lastName" placeholder="Last Name" type="text" required />
-            </div>
-            <div>
-              <input id="email" placeholder="Email" type="email" required />
-            </div>
-            <div>
-              <input
-                id="password"
-                placeholder="Password"
-                type="password"
-                required
-                minLength={8} // Minimum password length requirement
-              />
-            </div>
-          </div>
+          <button className="bg-[#7577CD] p-1 rounded text-white" onClick={handleReturnToLogin}>
+            Sign in
+          </button>
+        )}
+      </div>
+
+      <form onSubmit={isLoginForm ? handleLogin : handleSignUp} className="flex flex-col items-center justify-center gap-5">
+        {isLoginForm ? (
+          <>
+            <input defaultValue="" className="p-2 bg-[#D9D9D9] rounded" id="email" placeholder="Email" type="email" required />
+            <input defaultValue="" className="p-2 bg-[#D9D9D9] rounded" id="password" placeholder="Password" type="password" required />
+          </>
+        ) : (
+          <>
+            <input defaultValue="" className="p-2 bg-[#D9D9D9] rounded" id="firstName" placeholder="First Name" type="text" required />
+            <input defaultValue="" className="p-2 bg-[#D9D9D9] rounded" id="lastName" placeholder="Last Name" type="text" required />
+            <input defaultValue="" className="p-2 bg-[#D9D9D9] rounded" id="email" placeholder="Email" type="email" required />
+            <input
+              defaultValue=""
+              className="p-2 bg-[#D9D9D9] rounded"
+              id="password"
+              placeholder="Password"
+              type="password"
+              required
+              minLength={8} // Minimum password length requirement
+            />
+          </>
         )}
 
-        <button type="submit">{isLoginForm ? "Login" : "Sign up"}</button>
+        <button className="bg-[#7577CD] p-3 px-6 rounded text-white font-black" type="submit">
+          {isLoginForm ? "Login" : "Sign up"}
+        </button>
       </form>
     </div>
   );
