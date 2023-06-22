@@ -16,6 +16,7 @@ app.use(cors({ origin: allowedOrigins, credentials: true }));
 app.use(express.json());
 
 app.use("/api/user", require("./controllers/user"));
+app.use("/api/pneumonia", require("./controllers/pneumonia"));
 
 app.get("/", (req, res) => {
   res.send("Hello World!");

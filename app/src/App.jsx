@@ -1,13 +1,16 @@
 import { BrowserRouter as Router, Route, Routes, useLocation, Link, Navigate, Outlet } from "react-router-dom";
 import Login from "./pages/login/Login";
 import HomePage from "./pages/home/HomePage.jsx";
-import Dashboard from "./pages/dashboard/Dashboard";
 import { useSelector } from "react-redux";
+import { Toaster } from "react-hot-toast";
+import SideBar from "./components/SideBar";
+import Index from "./pages/dashboard/Index";
 
 const App = () => {
   console.log(useSelector((state) => state.auth.isLoggedIn));
   return (
     <Router>
+      <Toaster />
       <Routes>
         <Route path="/" element={<NavBar />}>
           {/* Not connected routes */}
@@ -18,7 +21,9 @@ const App = () => {
           </Route>
           {/* Connected routes */}
           <Route element={<AuthLayout />}>
-            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="" element={<SideBar />}>
+              <Route path="dashboard/*" element={<Index />} />
+            </Route>
           </Route>
         </Route>
         <Route

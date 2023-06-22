@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { loginSuccess } from "../../redux/actions/auth";
 import API from "../../API";
 import logo from "../../assets/logo.png";
+import { toast } from "react-hot-toast";
 
 function Login() {
   const [isLoginForm, setIsLoginForm] = useState(true);
@@ -15,15 +16,9 @@ function Login() {
     const password = e.target.password.value;
 
     const data = await API.post("/user/login", { email, password });
-    if (!data.isValid) return console.log(data.error);
+    if (!data.isValid) return toast.error(data.error);
 
-    if (data.isValid) {
-      console.log("Login successful");
-      dispatch(loginSuccess(data.user)); // Dispatch the login success action with the user data
-    } else {
-      console.log("Invalid email or password");
-      // Display an error message to the user
-    }
+    dispatch(loginSuccess(data.user)); // Dispatch the login success action with the user data
   };
 
   const handleSignUp = async (e) => {
@@ -33,11 +28,8 @@ function Login() {
     const lastName = e.target.lastName.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(firstName, lastName, email, password);
     const data = await API.post("/user/signup", { firstName, lastName, email, password });
     if (!data.isValid) return console.log(data.error);
-    console.log("Signup response:", data); // Add this line
-    console.log("Signup successful");
     dispatch(loginSuccess(data.user)); // Dispatch the login success action with the user data
   };
 
