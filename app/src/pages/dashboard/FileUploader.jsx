@@ -41,9 +41,13 @@ const FileUploader = ({ selectedFile, setSelectedFile }) => {
       <label htmlFor="fileInput" className="cursor-pointer">
         <input type="file" id="fileInput" accept="image/*" className="hidden" onChange={handleFileSelect} />
         {selectedFile ? (
-          <div>
-            <p>Selected file:</p>
-            <p>{selectedFile.name}</p>
+          <div className="flex flex-row items-center">
+            <div>
+              <p>Selected file:</p>
+              <p>{selectedFile.name}</p>
+            </div>
+
+            <img src={URL.createObjectURL(selectedFile)} alt="preview" className="h-20" />
           </div>
         ) : (
           <div className="text-gray-500 flex items-center">

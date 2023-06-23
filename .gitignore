@@ -3,3 +3,5 @@
 **/node_modules
 **/dist
 **/build
+
+pythonApi/model_ML.h5
