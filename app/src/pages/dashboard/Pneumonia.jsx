@@ -1,6 +1,6 @@
 import { toast } from "react-hot-toast";
 import api from "../../API";
-import FileUploader from "./FileUploader";
+import FileUploader from "../../components/FileUploader";
 import { useState } from "react";
 
 function Pneumonia() {

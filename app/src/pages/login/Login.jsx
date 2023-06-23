@@ -29,7 +29,7 @@ function Login() {
     const email = e.target.email.value;
     const password = e.target.password.value;
     const data = await API.post("/user/signup", { firstName, lastName, email, password });
-    if (!data.isValid) return console.log(data.error);
+    if (!data.isValid) return toast.error(data.error);
     dispatch(loginSuccess(data.user)); // Dispatch the login success action with the user data
   };
 

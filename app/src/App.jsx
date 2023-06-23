@@ -7,7 +7,6 @@ import SideBar from "./components/SideBar";
 import Index from "./pages/dashboard/Index";
 
 const App = () => {
-  console.log(useSelector((state) => state.auth.isLoggedIn));
   return (
     <Router>
       <Toaster />

@@ -34,7 +34,6 @@ function SideBar() {
 
 const SideBarItem = ({ title, to }) => {
   const location = useLocation();
-  console.log(location.pathname, to);
   return (
     <Link to={to} className={`${location.pathname === to ? "" : ""}`}>
       <div className={`p-1 pl-10 ${location.pathname === to ? "text-black font-bold bg-white" : "text-white"}`}>{title}</div>
