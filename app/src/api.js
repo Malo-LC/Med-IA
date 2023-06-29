@@ -43,6 +43,7 @@ class API {
           mode: "cors",
           method: "POST",
           headers: { "Content-Type": "application/json" },
+          credentials: "include",
           body: typeof body === "string" ? body : JSON.stringify(body),
         });
 
