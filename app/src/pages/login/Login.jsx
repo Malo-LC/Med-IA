@@ -19,6 +19,7 @@ function Login() {
     if (!data.isValid) return toast.error(data.error);
 
     dispatch(loginSuccess(data.user)); // Dispatch the login success action with the user data
+    toast.success("Logged in successfully");
   };
 
   const handleSignUp = async (e) => {
@@ -31,6 +32,7 @@ function Login() {
     const data = await API.post("/user/signup", { firstName, lastName, email, password });
     if (!data.isValid) return toast.error(data.error);
     dispatch(loginSuccess(data.user)); // Dispatch the login success action with the user data
+    toast.success("Logged in successfully");
   };
 
   const handleReturnToLogin = () => {
