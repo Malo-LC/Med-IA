@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Dashboard() {
   return (
     <div className=" h-screen flex flex-row">
@@ -9,9 +11,9 @@ function Dashboard() {
         <div className="flex flex-row">
           <div className="bg-[#D9D9D9] w-2/5 h-5/6 rounded-md ml-10 mt-10 justify-center items-center">
             <h1 className="ml-2 mt-2 font-bold">Last features used</h1>
-            <button className="bg-[#4c4b4b] text-white rounded-lg justify-center items-center ">
+            <Link to="/dashboard/pneumonia" className="bg-[#4c4b4b] font-bold rounded-lg justify-center items-center hover:text-white">
               <p className="ml-2 mr-2">Pneumonia Detection</p>
-            </button>
+            </Link>
           </div>
           <div className="bg-[#D9D9D9] w-2/5 h-5/6 rounded-md ml-10 mt-10 justify-center items-center truncate">
             <div className="ml-5">
