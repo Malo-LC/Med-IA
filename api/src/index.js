@@ -29,6 +29,7 @@ app.use(express.json({ limit: "50mb" }));
 
 app.use("/api/user", require("./controllers/user"));
 app.use("/api/pneumonia", require("./controllers/pneumonia"));
+app.use("/api/analysis", require("./controllers/analysis"));
 
 require("./passport")(app);
 
