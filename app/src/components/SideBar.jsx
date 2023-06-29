@@ -20,8 +20,8 @@ function SideBar() {
           <SideBarItem title="Melanoma Detection" to="/dashboard/melanoma" />
           <SideBarItem title="Melanoma recurrence prediction" to="/dashboard/melanoma-recurrence" />
 
-          <button className="bg-[#4c4b4b] mt-10 text-white rounded-lg justify-center items-center " onClick={() => dispatch(logout())}>
-            <p className="mx-2">disconnect</p>
+          <button className="bg-[#4c4b4b] mt-10 ml-4 text-white rounded-lg justify-center items-center " onClick={() => dispatch(logout())}>
+            <p className="mx-2">Disconnect</p>
           </button>
         </div>
       </div>
