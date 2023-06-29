@@ -1,24 +1,23 @@
+const passport = require("passport");
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const app = require("express").Router();
 
 app.post("/login", async (req, res) => {
   try {
-    const { email, password } = req.body;
-
-    const foundUser = await User.findOne({ where: { email: email } });
-    if (!foundUser) return res.status(404).json({ error: "Email or password invalid", isValid: false });
-
-    const verifiedPassword = await bcrypt.compare(password, foundUser.password);
-    if (!verifiedPassword) return res.status(404).json({ error: "Email or password invalid", isValid: false });
-
-    const user = {
-      firstName: foundUser.first_name,
-      lastName: foundUser.last_name,
-      email: foundUser.email,
-    };
-
-    return res.status(200).json({ isValid: true, user: user });
+    passport.authenticate("local", (err, user) => {
+      if (err) return res.status(404).json({ error: "Email or password invalid", isValid: false });
+      if (!user) return res.status(404).json({ error: "Email or password invalid", isValid: false });
+      req.logIn(user, (err) => {
+        if (err) return res.status(404).json({ error: "Email or password invalid", isValid: false });
+        const user = {
+          firstName: req.user.first_name,
+          lastName: req.user.last_name,
+          email: req.user.email,
+        };
+        return res.status(200).json({ message: "Login successful", user: user, isValid: true });
+      });
+    })(req, res);
   } catch (error) {
     console.log(error);
   }

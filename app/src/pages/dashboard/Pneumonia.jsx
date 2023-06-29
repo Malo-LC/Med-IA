@@ -13,7 +13,7 @@ function Pneumonia() {
     const image = await readFileAsync(selectedFile);
     const response = await api.post("/pneumonia/analyze", { image });
     setLoading(false);
-    if (!response?.ok) return toast.error("Something went wrong");
+    if (!response?.ok) return toast.error(response.error || "Error while analyzing image");
     setResult(response.data);
   };
 
