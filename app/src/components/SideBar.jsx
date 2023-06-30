@@ -25,11 +25,11 @@ function SideBar() {
 
         {/* Subscription and Settings */}
         <div>
-          <Link to={"/dashboard/subscription"} className=" my-4 ml-2 flex flex-row items-center w-fit ">
+          <Link to={"/dashboard/subscription"} className=" my-4 ml-2 flex flex-row items-center w-fit hover:font-bold ">
             <PiMoneyFill />
             <div className="pl-2">Manage Subscription</div>
           </Link>
-          <Link to={"/dashboard/settings"} className=" my-4 ml-2 flex flex-row items-center w-fit">
+          <Link to={"/dashboard/settings"} className=" my-4 ml-2 flex flex-row items-center w-fit hover:font-bold">
             <FiSettings />
             <div className="pl-2">Settings</div>
           </Link>
@@ -47,7 +47,9 @@ const SideBarItem = ({ title, to, icon }) => {
   return (
     <Link
       to={to}
-      className={`${location.pathname === to ? "text-black font-bold bg-white" : "text-white"} p-1 pl-10 flex flex-row items-center gap-2`}>
+      className={`${
+        location.pathname === to ? "text-black font-bold bg-white" : "text-white"
+      } p-1 pl-10 flex flex-row items-center gap-2 hover:bg-[#24255e]`}>
       {icon}
       <div className={``}>{title}</div>
     </Link>

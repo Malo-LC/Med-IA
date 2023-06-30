@@ -24,7 +24,7 @@ function Dashboard() {
   return (
     <div className=" h-screen flex flex-row">
       <div className="flex flex-col w-full h-full ">
-        <h1 className="ml-10 font-bold">Welcome {user.firstName} </h1>
+        <h1 className="ml-10 text-4xl font-bold">Welcome {user.firstName} </h1>
         <div className="bg-[#D9D9D9] w-2/3 rounded-md ml-10 mt-10">
           <h1 className="ml-2 mt-2 font-bold">History</h1>
           <div className="flex flex-row w-fit">
