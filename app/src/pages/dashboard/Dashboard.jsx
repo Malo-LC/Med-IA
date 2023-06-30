@@ -4,6 +4,7 @@ import { toast } from "react-hot-toast";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import moment from "moment";
+moment.locale("fr");
 
 function Dashboard() {
   const [history, setHistory] = useState([]);
@@ -48,11 +49,11 @@ function Dashboard() {
             <div className="ml-5">
               <h1 className="mt-2 font-bold">Agenda</h1>
 
-              <ul className="font-bold">Aujourd’hui Vendredi 12 mai</ul>
+              <ul className="font-bold">Today - {moment().format("dddd Do MMM")}</ul>
               <li>12h : RDV Madame Michu</li>
               <li>15h : RDV Monsieur Georges</li>
               <li>16h : RDV Madame Thomas</li>
-              <ul className="font-bold">Demain Samedi 13 mai</ul>
+              <ul className="font-bold">Tomorrow - {moment().add(1, "day").format("dddd Do MMM")}</ul>
               <li>Aucun événement à venir</li>
             </div>
           </div>

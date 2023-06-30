@@ -3,6 +3,7 @@ import { Link, Outlet, useLocation } from "react-router-dom";
 import { BsLungsFill } from "react-icons/bs";
 import { PiPersonArmsSpreadFill, PiMoneyFill } from "react-icons/pi";
 import { FiSettings } from "react-icons/fi";
+import { AiFillSkin } from "react-icons/ai";
 
 function SideBar() {
   return (
@@ -16,8 +17,10 @@ function SideBar() {
           <div className="font-bold pl-4">Cardiology features</div>
           <SideBarItem icon={<BsLungsFill />} title="Pneumonia Detection" to="/dashboard/pneumonia" />
           <div className="font-bold pl-4">Dermatology features</div>
-          <SideBarItem icon={<PiPersonArmsSpreadFill />} title="Melanoma Detection" to="/dashboard/melanoma" />
-          <SideBarItem icon={<PiPersonArmsSpreadFill />} title="Melanoma recurrence prediction" to="/dashboard/melanoma-recurrence" />
+          <SideBarItem icon={<AiFillSkin />} title="Melanoma Detection" to="/dashboard/melanoma" />
+          <SideBarItem icon={<AiFillSkin />} title="Melanoma recurrence prediction" to="/dashboard/melanoma-recurrence" />
+          <div className="font-bold pl-4">Administration</div>
+          <SideBarItem icon={<PiPersonArmsSpreadFill />} title="Patients" to="/dashboard/patients" />
         </div>
 
         {/* Subscription and Settings */}
