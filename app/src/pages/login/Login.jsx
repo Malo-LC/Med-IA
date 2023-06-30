@@ -16,7 +16,7 @@ function Login() {
     const password = e.target.password.value;
 
     const data = await API.post("/user/login", { email, password });
-    if (!data.isValid) return toast.error(data.error);
+    if (!data.ok) return toast.error(data.error);
 
     dispatch(loginSuccess(data.user)); // Dispatch the login success action with the user data
     toast.success("Logged in successfully");
@@ -30,9 +30,9 @@ function Login() {
     const email = e.target.email.value;
     const password = e.target.password.value;
     const data = await API.post("/user/signup", { firstName, lastName, email, password });
-    if (!data.isValid) return toast.error(data.error);
-    dispatch(loginSuccess(data.user)); // Dispatch the login success action with the user data
-    toast.success("Logged in successfully");
+    if (!data.ok) return toast.error(data.error || "An error occurred");
+    setIsLoginForm((prev) => !prev);
+    toast.success("Registered successfully");
   };
 
   const handleReturnToLogin = () => {
