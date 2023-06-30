@@ -25,11 +25,11 @@ function SideBar() {
 
         {/* Subscription and Settings */}
         <div>
-          <Link to={"/dashboard/subscription"} className=" my-4 ml-2 flex flex-row items-center w-fit ">
+          <Link to={"/dashboard/subscription"} className=" my-4 ml-2 flex flex-row items-center w-fit hover:font-bold ">
             <PiMoneyFill />
             <div className="pl-2">Manage Subscription</div>
           </Link>
-          <Link to={"/dashboard/settings"} className=" my-4 ml-2 flex flex-row items-center w-fit">
+          <Link to={"/dashboard/settings"} className=" my-4 ml-2 flex flex-row items-center w-fit hover:font-bold">
             <FiSettings />
             <div className="pl-2">Settings</div>
           </Link>
