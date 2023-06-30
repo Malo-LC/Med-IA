@@ -3,6 +3,7 @@ import base64
 from io import BytesIO
 from tensorflow.keras.preprocessing.image import img_to_array
 
+print("Loading model")
 model_path = "model_ML.h5"
 model = tf.keras.models.load_model(model_path)
 

@@ -6,6 +6,7 @@ class API {
       try {
         const response = await fetch(`${API_URL}${path}`, {
           mode: "cors",
+          credentials: "include",
           method: "GET",
           headers: { "Content-Type": "application/json" },
         });
@@ -24,6 +25,7 @@ class API {
         const response = await fetch(`${API_URL}${path}`, {
           mode: "cors",
           method: "PUT",
+          credentials: "include",
           headers: { "Content-Type": "application/json" },
           body: typeof body === "string" ? body : JSON.stringify(body),
         });
@@ -43,6 +45,7 @@ class API {
           mode: "cors",
           method: "POST",
           headers: { "Content-Type": "application/json" },
+          credentials: "include",
           body: typeof body === "string" ? body : JSON.stringify(body),
         });
 
