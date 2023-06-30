@@ -48,8 +48,8 @@ const SideBarItem = ({ title, to, icon }) => {
     <Link
       to={to}
       className={`${
-        location.pathname === to ? "text-black font-bold bg-white" : "text-white"
-      } p-1 pl-10 flex flex-row items-center gap-2 hover:bg-[#24255e]`}>
+        location.pathname === to ? "text-black font-bold bg-white" : "text-white hover:bg-[#24255e]"
+      } p-1 pl-10 flex flex-row items-center gap-2 `}>
       {icon}
       <div className={``}>{title}</div>
     </Link>
