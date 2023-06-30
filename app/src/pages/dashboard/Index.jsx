@@ -5,6 +5,7 @@ import Pneumonia from "./Pneumonia";
 // import MelanomaRecurrence from "./MelanomaRecurrence";
 import Settings from "./Settings";
 import Subscription from "./Subscription";
+import Patients from "./Patients";
 
 const Index = () => {
   const location = useLocation();
@@ -22,6 +23,8 @@ const Index = () => {
       return <Settings />;
     case "/dashboard/subscription":
       return <Subscription />;
+    case "/dashboard/patients":
+      return <Patients />;
     default:
       return <Navigate to="/dashboard" replace />;
   }

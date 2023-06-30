@@ -1,7 +1,7 @@
 const User = require("../models/user");
 const Analysis = require("../models/analysis");
 
-const saveAnalysisToDb = async (type, result, image, userId) => {
+const saveAnalysisToDb = async (type, result, image, userId, patientId) => {
   try {
     if (!userId) return { error: "User not found, please reconnect" };
     const user = await User.findOne({ where: { id: userId } });
@@ -15,6 +15,7 @@ const saveAnalysisToDb = async (type, result, image, userId) => {
       result,
       image,
       userId,
+      patientId,
     });
   } catch (error) {
     console.log(error);
