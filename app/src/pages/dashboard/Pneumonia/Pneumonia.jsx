@@ -1,8 +1,8 @@
 import { toast } from "react-hot-toast";
-import api from "../../API";
-import FileUploader from "../../components/FileUploader";
+import api from "../../../API";
+import FileUploader from "../../../components/FileUploader";
 import { useState } from "react";
-import Patients from "../../components/Patients";
+import Patients from "../../../components/Patients";
 
 function Pneumonia() {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -31,7 +31,7 @@ function Pneumonia() {
 
   return (
     <div className="flex flex-row gap-5">
-      <div className="bg-[#D9D9D9] w-fit rounded-md ml-10 mt-10 flex flex-col justify-between items-center p-5">
+      <div className="bg-[#D9D9D9] h-fit w-fit rounded-md ml-10 mt-10 flex flex-col justify-between items-center p-5">
         <h1 className="ml-2 mt-2 font-bold w-full">Analyze</h1>
         <FileUploader setSelectedFile={setSelectedFile} selectedFile={selectedFile} />
         {selectedFile && (

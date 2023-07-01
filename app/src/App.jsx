@@ -6,6 +6,7 @@ import { Toaster } from "react-hot-toast";
 import SideBar from "./components/SideBar";
 import Index from "./pages/dashboard/Index";
 import { useEffect } from "react";
+import ResumePneumonia from "./pages/dashboard/Pneumonia/Resume";
 import api from "./API";
 import { logout } from "./redux/actions/auth";
 
@@ -34,6 +35,7 @@ const App = () => {
           {/* Connected routes */}
           <Route element={<AuthLayout />}>
             <Route path="" element={<SideBar />}>
+              <Route path="dashboard/pneumonia/:id" element={<ResumePneumonia />} />
               <Route path="dashboard/*" element={<Index />} />
             </Route>
           </Route>

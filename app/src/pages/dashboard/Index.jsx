@@ -1,6 +1,6 @@
 import { Navigate, useLocation } from "react-router-dom";
 import Dashboard from "./Dashboard";
-import Pneumonia from "./Pneumonia";
+import Pneumonia from "./Pneumonia/Pneumonia";
 // import Melanoma from "./Melanoma";
 // import MelanomaRecurrence from "./MelanomaRecurrence";
 import Settings from "./Settings";

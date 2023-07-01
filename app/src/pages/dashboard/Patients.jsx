@@ -18,13 +18,13 @@ function Patients() {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    // Add the new user to the array
     const newUser = {
       firstName: e.target.firstName.value,
       lastName: e.target.lastName.value,
       email: e.target.email.value,
+      age: e.target.age.value,
+      gender: e.target.gender.value,
     };
-    console.log("New user:", newUser);
 
     const response = await api.post("/patient", newUser);
     if (!response.ok) return toast.error(response.error || "Error while adding patient");
@@ -55,6 +55,22 @@ function Patients() {
                 id="lastName"
                 className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
               />
+            </div>
+          </div>
+          <div className="flex mb-4">
+            <div className="w-1/2 mr-2">
+              <label className="block mb-1 font-semibold">Age</label>
+              <input type="number" id="age" className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500" />
+            </div>
+            <div className="w-1/2">
+              <label className="block mb-1 font-semibold">Gender</label>
+
+              <select id="gender" required className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500">
+                <option value="">Select</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
             </div>
           </div>
           <div className="w-1/2 mb-2">
