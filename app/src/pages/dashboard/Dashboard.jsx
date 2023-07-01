@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import api from "../../API";
 import { toast } from "react-hot-toast";
 import { useEffect, useState } from "react";
@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import moment from "moment";
 
 function Dashboard() {
+  const navigate = useNavigate();
   const [history, setHistory] = useState([]);
   const user = useSelector((state) => state.auth.user);
 
@@ -27,7 +28,10 @@ function Dashboard() {
         <h1 className="font-bold mb-4">History</h1>
         <div className="flex flex-row gap-3">
           {history.map((item) => (
-            <div className="flex flex-col justify-center items-center bg-slate-300 rounded overflow-hidden w-[15vw]" key={item.id}>
+            <div
+              onClick={() => navigate(`/dashboard/pneumonia/${item.id}`)}
+              className="flex flex-col justify-center items-center bg-slate-300 rounded overflow-hidden w-[15vw] cursor-pointer"
+              key={item.id}>
               <img src={item.image} alt="image" className="w-full " />
               <div className="">{moment(item.date).fromNow()}</div>
               <div className="">{item.Patient.first_name}</div>

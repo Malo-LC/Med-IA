@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { AiFillFileImage } from "react-icons/ai";
 
 const FileUploader = ({ selectedFile, setSelectedFile }) => {
   const [isDragging, setIsDragging] = useState(false);
@@ -33,12 +34,12 @@ const FileUploader = ({ selectedFile, setSelectedFile }) => {
 
   return (
     <div
-      className={`flex flex-col items-center justify-center p-4 border-4 border-dashed rounded-lg ${isDragging ? "border-blue-500" : "border-gray-300"}`}
+      className={`flex flex-col items-center justify-center border-4 border-dashed rounded-lg ${isDragging ? "border-blue-500" : "border-gray-300"}`}
       onDrop={handleDrop}
       onDragOver={handleDragOver}
       onDragEnter={handleDragEnter}
       onDragLeave={handleDragLeave}>
-      <label htmlFor="fileInput" className="cursor-pointer">
+      <label htmlFor="fileInput" className="cursor-pointer p-4">
         <input type="file" id="fileInput" accept="image/*" className="hidden" onChange={handleFileSelect} />
         {selectedFile ? (
           <div className="flex flex-row items-center">
@@ -50,9 +51,9 @@ const FileUploader = ({ selectedFile, setSelectedFile }) => {
             <img src={URL.createObjectURL(selectedFile)} alt="preview" className="h-20" />
           </div>
         ) : (
-          <div className="text-gray-500 flex items-center">
-            <span className="text-3xl">📁</span>
-            <p className="mt-2">Drag and drop a file here or click to upload</p>
+          <div className="text-gray-500 flex items-center gap-5">
+            <AiFillFileImage size={35} className="text-gray-800" />
+            <p className="">Drag and drop a file here or click to upload</p>
           </div>
         )}
       </label>

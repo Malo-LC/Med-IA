@@ -13,7 +13,7 @@ router.get("/history", async (req, res) => {
     if (!user) return res.status(400).json({ error: "User not found, please reconnect", ok: false });
     const history = await Analysis.findAll({ where: { userId: user.id }, include: [Patient] });
     history.reverse();
-    return res.status(200).json({ ok: true, message: "History retrieved", data: history });
+    return res.status(200).json({ ok: true, data: history });
   } catch (error) {
     console.log(error?.code || error);
   }
@@ -41,7 +41,21 @@ router.post("/pneumonia", async (req, res) => {
     const saved = await saveAnalysisToDb("pneumonia", data, image, userId, patientId);
     if (saved?.error) return res.status(500).json({ error: saved.error, ok: false });
 
-    return res.status(200).json({ ok: true, message: "Pneumonia analyzed", data: data });
+    return res.status(200).json({ ok: true, data: data });
+  } catch (error) {
+    console.log(error?.code || error);
+  }
+});
+
+router.get("/pneumonia/:id", async (req, res) => {
+  try {
+    const analysisId = req.params.id;
+    if (!analysisId) return res.status(400).json({ error: "Analysis not found", ok: false });
+
+    const analysis = await Analysis.findOne({ where: { id: analysisId }, include: [Patient] });
+    if (!analysis) return res.status(404).json({ error: "Analysis not found", ok: false });
+
+    return res.status(200).json({ ok: true, data: analysis });
   } catch (error) {
     console.log(error?.code || error);
   }

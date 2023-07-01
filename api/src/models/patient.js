@@ -15,6 +15,12 @@ const Patient = db.define(
     email: {
       type: DataTypes.STRING,
     },
+    age: {
+      type: DataTypes.INTEGER,
+    },
+    gender: {
+      type: DataTypes.STRING,
+    },
   },
   { freezeTableName: true, timestamps: false }
 );

@@ -14,11 +14,13 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
-    const { firstName, lastName, email } = req.body;
+    const { firstName, lastName, email, age, gender } = req.body;
     const patient = await Patient.create({
       first_name: firstName,
       last_name: lastName,
       email: email || null,
+      age: age,
+      gender: gender,
     });
 
     return res.status(200).json({ ok: true, data: patient });
