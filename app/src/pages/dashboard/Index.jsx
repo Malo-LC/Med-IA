@@ -1,33 +1,25 @@
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Dashboard from "./Dashboard";
-import Pneumonia from "./Pneumonia/Pneumonia";
+import PneumoniaIndex from "./Pneumonia/Index.jsx";
 // import Melanoma from "./Melanoma";
 // import MelanomaRecurrence from "./MelanomaRecurrence";
 import Settings from "./Settings";
 import Subscription from "./Subscription";
-import Patients from "./Patients";
+import PatientsIndex from "./patients/Index";
 
 const Index = () => {
-  const location = useLocation();
-
-  switch (location.pathname) {
-    case "/dashboard":
-      return <Dashboard />;
-    case "/dashboard/pneumonia":
-      return <Pneumonia />;
-    // case "/dashboard/melanoma":
-    //   return <Melanoma />;
-    // case "/dashboard/melanoma-recurrence":
-    //   return <MelanomaRecurrence />;
-    case "/dashboard/settings":
-      return <Settings />;
-    case "/dashboard/subscription":
-      return <Subscription />;
-    case "/dashboard/patients":
-      return <Patients />;
-    default:
-      return <Navigate to="/dashboard" replace />;
-  }
+  return (
+    <Routes>
+      <Route path="" element={<Dashboard />} />
+      <Route path="/pneumonia/*" element={<PneumoniaIndex />} />
+      {/* <Route path="/melanoma/*" element={<Melanoma />} />
+    <Route path="/melanoma-recurrence/*" element={<MelanomaRecurrence />} /> */}
+      <Route path="/settings/*" element={<Settings />} />
+      <Route path="/subscription/*" element={<Subscription />} />
+      <Route path="/patients/*" element={<PatientsIndex />} />
+      <Route path="*" element={<Navigate to="/dashboard" />} />
+    </Routes>
+  );
 };
 
 export default Index;

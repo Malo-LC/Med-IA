@@ -29,12 +29,12 @@ function Dashboard() {
         <div className="flex flex-row gap-3">
           {history.map((item) => (
             <div
-              onClick={() => navigate(`/dashboard/pneumonia/${item.id}`)}
+              onClick={() => navigate(`/dashboard/pneumonia/view/${item.id}`)}
               className="flex flex-col justify-center items-center bg-slate-300 rounded overflow-hidden w-[15vw] cursor-pointer"
               key={item.id}>
               <img src={item.image} alt="image" className="w-full " />
               <div className="">{moment(item.date).fromNow()}</div>
-              <div className="">{item.Patient.first_name}</div>
+              <div className="">{item?.Patient?.first_name || "deleted"}</div>
               <div className={`rounded-full p-2 mb-2 ${item.result ? "bg-red-500" : "bg-green-500"}`}>{item.result ? "Positive" : "Negative"}</div>
             </div>
           ))}
