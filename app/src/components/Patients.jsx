@@ -19,7 +19,7 @@ function Patients({ setPatientId, patientId }) {
   return (
     <div className="max-w-lg mx-auto mt-8">
       <h2 className="text-2xl font-bold mb-4">User List</h2>
-      <ul className="bg-white border border-gray-200 p-4 rounded-lg shadow-md">
+      <ul className="bg-white border border-gray-200 p-4 rounded-lg shadow-md overflow-y-scroll max-h-96">
         {patients.length ? (
           patients.map((user, index) => (
             <li

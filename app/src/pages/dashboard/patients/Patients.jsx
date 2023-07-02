@@ -38,7 +38,7 @@ function Patients() {
           <AiOutlinePlus size={24} />
         </button>
       </div>
-      <div className="bg-white border border-gray-200 p-4 rounded-lg shadow-md">
+      <div className="bg-white border border-gray-200 p-4 rounded-lg shadow-md overflow-y-scroll max-h-96">
         {patients.map((user, index) => (
           <div
             key={index}
