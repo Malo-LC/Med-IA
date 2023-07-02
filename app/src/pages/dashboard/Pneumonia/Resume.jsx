@@ -18,7 +18,6 @@ function Resume() {
   const getData = async () => {
     const result = await api.get(`/analysis/pneumonia/${id}`);
     if (!result.ok) return toast.error(result.error || "Error while getting data");
-    console.log(result.data);
     setData(result.data);
   };
 
