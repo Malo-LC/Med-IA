@@ -40,7 +40,7 @@ function Resume() {
           <AiOutlineArrowLeft size={24} />
         </button>
 
-        <h2 className="text-2xl font-bold">Pneumonia Radiology Summary</h2>
+        <h2 className="text-2xl font-bold">melanoma Radiology Summary</h2>
         <MdDeleteOutline onClick={() => deleteAnalysis()} size={24} className="text-gray-600 hover:text-red-500 cursor-pointer ml-2" />
       </div>
       <div className="bg-white border border-gray-200 p-6 rounded-lg shadow-md">
@@ -51,7 +51,7 @@ function Resume() {
         <div className="flex items-center mb-4">
           <img
             src={data.image}
-            alt="Pneumonia Radiology Image"
+            alt="Melanoma Radiology Image"
             className="w-64 h-auto rounded-md cursor-pointer"
             onClick={() => window.open(data.image, "_blank")}
           />
@@ -72,7 +72,7 @@ function Resume() {
         </div>
         <div>
           <h4 className="text-lg font-semibold">Result</h4>
-          <p className="mt-2">{data.result}</p>
+          <p className="mt-2 capitalize">{data.result}</p>
         </div>
       </div>
     </div>

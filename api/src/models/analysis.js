@@ -12,9 +12,8 @@ const Analysis = db.define(
       enum: ["pneumonia", "melanoma"],
     },
     result: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.STRING,
       allowNull: false,
-      description: "True if positive, false if negative",
     },
     image: {
       type: DataTypes.TEXT("medium"),

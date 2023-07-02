@@ -34,7 +34,7 @@ router.post("/pneumonia", async (req, res) => {
     if (!base64Regex.test(image)) return res.status(400).json({ error: "Invalid image", ok: false });
 
     // send image to python server
-    const result = await axios.post("http://localhost:5000/predict", { image }, { headers: { "Content-Type": "application/json" } });
+    const result = await axios.post("http://localhost:5000/predictPneumonia", { image }, { headers: { "Content-Type": "application/json" } });
     const data = result.data === "normal" ? "Normal" : "Pneumonia";
 
     const userId = req?.session?.passport?.user;
@@ -47,7 +47,7 @@ router.post("/pneumonia", async (req, res) => {
   }
 });
 
-router.get("/pneumonia/:id", async (req, res) => {
+router.get("/analysis/:id", async (req, res) => {
   try {
     const analysisId = req.params.id;
     if (!analysisId) return res.status(400).json({ error: "Analysis not found", ok: false });
@@ -61,7 +61,7 @@ router.get("/pneumonia/:id", async (req, res) => {
   }
 });
 
-router.delete("/pneumonia/:id", async (req, res) => {
+router.delete("/analysis/:id", async (req, res) => {
   try {
     const analysisId = req.params.id;
     if (!analysisId) return res.status(400).json({ error: "Analysis not found", ok: false });
@@ -71,6 +71,34 @@ router.delete("/pneumonia/:id", async (req, res) => {
 
     await analysis.destroy();
     return res.status(200).json({ ok: true, data: analysis });
+  } catch (error) {
+    console.log(error?.code || error);
+  }
+});
+
+router.post("/melanoma", async (req, res) => {
+  try {
+    const image = req.body.image;
+    const patientId = req.body.patientId;
+    if (!image) return res.status(400).json({ error: "No image provided", ok: false });
+    if (!patientId) return res.status(400).json({ error: "No patient selected", ok: false });
+
+    // check if image is more than 10mb
+    if (image.length > 10000000) return res.status(400).json({ error: "Image too large", ok: false });
+
+    // check if image is valid (base64 and picture)
+    const base64Regex = /^data:image\/\w+;base64,/;
+    if (!base64Regex.test(image)) return res.status(400).json({ error: "Invalid image", ok: false });
+
+    // send image to python server
+    const result = await axios.post("http://localhost:5000/predictMelanoma", { image }, { headers: { "Content-Type": "application/json" } });
+    const data = result.data;
+
+    const userId = req?.session?.passport?.user;
+    const saved = await saveAnalysisToDb("melanoma", data, image, userId, patientId);
+    if (saved?.error) return res.status(500).json({ error: saved.error, ok: false });
+
+    return res.status(200).json({ ok: true, data: data });
   } catch (error) {
     console.log(error?.code || error);
   }
