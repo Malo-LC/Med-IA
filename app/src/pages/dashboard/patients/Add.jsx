@@ -28,7 +28,7 @@ function Add() {
   return (
     <div className="max-w-lg mx-auto mt-8">
       <div className="flex items-center mb-4">
-        <button className="mr-2 p-2 rounded-full hover:bg-gray-200 focus:outline-none" onClick={() => navigate("/dashboard/patients")}>
+        <button className="mr-2 p-2 rounded-full hover:bg-gray-200 focus:outline-none" onClick={() => navigate(-1)}>
           <AiOutlineArrowLeft size={24} />
         </button>
         <h2 className="text-xl font-bold">Add Patient</h2>

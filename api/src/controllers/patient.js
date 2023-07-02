@@ -1,4 +1,5 @@
 const Patient = require("../models/patient");
+const Analysis = require("../models/analysis");
 
 const router = require("express").Router();
 
@@ -18,7 +19,11 @@ router.get("/:id", async (req, res) => {
     if (!id) return res.status(400).json({ ok: false, error: "Invalid id" });
 
     const patient = await Patient.findOne({ where: { id } });
-    return res.status(200).json({ ok: true, data: patient });
+    if (!patient) return res.status(400).json({ ok: false, error: "Patient not found" });
+
+    const analysis = await Analysis.findAll({ where: { patientId: patient.id } });
+
+    return res.status(200).json({ ok: true, data: patient, analysis });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ ok: false, error: "Internal server error" });
@@ -40,6 +45,26 @@ router.put("/:id", async (req, res) => {
     patient.age = age || patient.age;
     patient.gender = gender || patient.gender;
     await patient.save();
+
+    return res.status(200).json({ ok: true, data: patient });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ ok: false, error: "Internal server error" });
+  }
+});
+
+router.delete("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!id) return res.status(400).json({ ok: false, error: "Invalid id" });
+
+    const patient = await Patient.findOne({ where: { id } });
+    if (!patient) return res.status(400).json({ ok: false, error: "Patient not found" });
+
+    await patient.destroy();
+
+    // also delete all analysis of this patient
+    await Analysis.destroy({ where: { patientId: id } });
 
     return res.status(200).json({ ok: true, data: patient });
   } catch (error) {

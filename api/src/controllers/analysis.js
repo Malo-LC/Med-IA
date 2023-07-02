@@ -61,4 +61,19 @@ router.get("/pneumonia/:id", async (req, res) => {
   }
 });
 
+router.delete("/pneumonia/:id", async (req, res) => {
+  try {
+    const analysisId = req.params.id;
+    if (!analysisId) return res.status(400).json({ error: "Analysis not found", ok: false });
+
+    const analysis = await Analysis.findOne({ where: { id: analysisId } });
+    if (!analysis) return res.status(404).json({ error: "Analysis not found", ok: false });
+
+    await analysis.destroy();
+    return res.status(200).json({ ok: true, data: analysis });
+  } catch (error) {
+    console.log(error?.code || error);
+  }
+});
+
 module.exports = router;

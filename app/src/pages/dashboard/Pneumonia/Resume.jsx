@@ -5,6 +5,7 @@ import { toast } from "react-hot-toast";
 import moment from "moment";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import Loader from "../../../components/Loader";
+import { MdDeleteOutline } from "react-icons/md";
 
 function Resume() {
   const { id } = useParams();
@@ -21,15 +22,26 @@ function Resume() {
     setData(result.data);
   };
 
+  const deleteAnalysis = async () => {
+    if (!window.confirm("Are you sure you want to delete this analysis ?")) return;
+
+    const result = await api.delete(`/analysis/pneumonia/${id}`);
+    if (!result.ok) return toast.error(result.error || "Error while deleting analysis");
+    toast.success("Analysis deleted successfully");
+    navigate("/dashboard");
+  };
+
   if (!data) return <Loader />;
 
   return (
     <div className="max-w-lg mx-auto mt-8">
       <div className="flex items-center justify-between mb-4">
-        <button className="mr-2 p-2 rounded-full hover:bg-gray-200 focus:outline-none" onClick={() => navigate("/dashboard")}>
+        <button className="mr-2 p-2 rounded-full hover:bg-gray-200 focus:outline-none" onClick={() => navigate(-1)}>
           <AiOutlineArrowLeft size={24} />
         </button>
+
         <h2 className="text-2xl font-bold">Pneumonia Radiology Summary</h2>
+        <MdDeleteOutline onClick={() => deleteAnalysis()} size={24} className="text-gray-600 hover:text-red-500 cursor-pointer ml-2" />
       </div>
       <div className="bg-white border border-gray-200 p-6 rounded-lg shadow-md">
         <div className="flex justify-between items-center mb-4">
@@ -46,16 +58,16 @@ function Resume() {
         </div>
         <div className="mb-4">
           <p className="mt-2">
-            <span className="font-semibold">Name:</span> {data.Patient?.first_name} {data.Patient?.last_name}
+            <span className="font-semibold">Name:</span> {data.Patient?.first_name || "Not found"} {data.Patient?.last_name}
           </p>
           <p className="mt-2">
-            <span className="font-semibold">Email:</span> {data.Patient?.email}
+            <span className="font-semibold">Email:</span> {data.Patient?.email || "Not found"}
           </p>
           <p className="mt-2">
-            <span className="font-semibold">Age:</span> {data.Patient?.age}
+            <span className="font-semibold">Age:</span> {data.Patient?.age || "Not found"}
           </p>
           <p className="mt-2">
-            <span className="font-semibold">Gender:</span> {data.Patient?.gender}
+            <span className="font-semibold">Gender:</span> {data.Patient?.gender || "Not found"}
           </p>
         </div>
         <div>

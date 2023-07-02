@@ -34,7 +34,7 @@ function Dashboard() {
               key={item.id}>
               <img src={item.image} alt="image" className="w-full " />
               <div className="">{moment(item.date).fromNow()}</div>
-              <div className="">{item.Patient.first_name}</div>
+              <div className="">{item?.Patient?.first_name || "deleted"}</div>
               <div className={`rounded-full p-2 mb-2 ${item.result ? "bg-red-500" : "bg-green-500"}`}>{item.result ? "Positive" : "Negative"}</div>
             </div>
           ))}
