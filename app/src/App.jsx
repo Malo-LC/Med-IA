@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes, useLocation, Link, Navigate, Outlet } from "react-router-dom";
+import { Route, Routes, useLocation, Link, Navigate, Outlet } from "react-router-dom";
 import Login from "./pages/login/Login";
 import HomePage from "./pages/home/HomePage.jsx";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,9 +11,10 @@ import { logout } from "./redux/actions/auth";
 
 const App = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
   useEffect(() => {
     getMe();
-  }, []);
+  }, [location.pathname]);
 
   const getMe = async () => {
     const response = await api.get("/user/me");
@@ -21,7 +22,7 @@ const App = () => {
   };
 
   return (
-    <Router>
+    <>
       <Toaster />
       <Routes>
         <Route path="/" element={<NavBar />}>
@@ -49,7 +50,7 @@ const App = () => {
           }
         />
       </Routes>
-    </Router>
+    </>
   );
 };
 const NavBar = () => {
