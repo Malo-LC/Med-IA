@@ -7,8 +7,8 @@ import { AiFillSkin } from "react-icons/ai";
 
 function SideBar() {
   return (
-    <div className=" h-screen flex flex-row">
-      <div className="flex flex-col justify-between bg-[#080957] h-full w-2/5 text-white">
+    <div className="h-screen flex flex-row">
+      <div className="flex flex-col justify-between bg-[#080957] h-full w-1/5 text-white">
         <div className="mt-2">
           <Link to={"/dashboard"} className="flex overflow-hidden  px-4 w-full items-center justify-center bg-[#080957]">
             <img className="" src={logo} alt="logo" />
@@ -18,7 +18,7 @@ function SideBar() {
           <SideBarItem icon={<BsLungsFill />} title="Pneumonia Detection" to="/dashboard/pneumonia" />
           <div className="font-bold pl-4">Dermatology features</div>
           <SideBarItem icon={<AiFillSkin />} title="Melanoma Detection" to="/dashboard/melanoma" />
-          <SideBarItem icon={<AiFillSkin />} title="Melanoma recurrence prediction" to="/dashboard/melanoma-recurrence" />
+          {/* <SideBarItem icon={<AiFillSkin />} title="Melanoma recurrence prediction" to="/dashboard/melanoma-recurrence" /> */}
           <div className="font-bold pl-4">Administration</div>
           <SideBarItem icon={<PiPersonArmsSpreadFill />} title="Patients" to="/dashboard/patients" />
         </div>
@@ -35,7 +35,7 @@ function SideBar() {
           </Link>
         </div>
       </div>
-      <div className="w-full">
+      <div className="w-4/5">
         <Outlet />
       </div>
     </div>
