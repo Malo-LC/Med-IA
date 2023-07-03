@@ -6,16 +6,22 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineEdit } from "react-icons/ai";
 import { MdDeleteOutline } from "react-icons/md";
+import Loader from "../../../components/Loader";
 
 function Patients() {
-  const navigate = useNavigate();
+  const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(false);
   const [patients, setPatients] = useState([]);
+  const navigate = useNavigate();
+
   useEffect(() => {
     getPatients();
-  }, []);
+  }, [search]);
 
   const getPatients = async () => {
-    const response = await api.get("/patient");
+    setLoading(true);
+    const response = await api.get(`/patient?search=${search || ""}`);
+    setLoading(false);
     if (!response.ok) return toast.error(response.error || "Error while getting patients");
     setPatients(response.data);
   };
@@ -38,41 +44,61 @@ function Patients() {
           <AiOutlinePlus size={24} />
         </button>
       </div>
+      <input
+        onChange={(e) => setSearch(e.target.value)}
+        value={search || ""}
+        type="text"
+        className="w-full border border-gray-200 p-4 rounded-lg shadow-md mb-4"
+        placeholder="Search..."
+      />
       <div className="bg-white border border-gray-200 p-4 rounded-lg shadow-md overflow-y-scroll max-h-96">
-        {patients.map((user, index) => (
-          <div
-            key={index}
-            className="flex items-center justify-between py-2 px-4 hover:bg-gray-100 rounded-md cursor-pointer"
-            onClick={() => navigate(`/dashboard/patients/view/${user.id}`)}>
-            <div className="flex items-center">
-              <RxAvatar />
-              <div className="ml-4">
-                <h3 className="text-lg font-semibold">
-                  {user.first_name} {user.last_name}
-                </h3>
-                <p className="text-gray-600">{user.email}</p>
+        {!loading ? (
+          patients.length !== 0 ? (
+            patients.map((user, index) => (
+              <div
+                key={index}
+                className="flex items-center justify-between py-2 px-4 hover:bg-gray-100 rounded-md cursor-pointer"
+                onClick={() => navigate(`/dashboard/patients/view/${user.id}`)}>
+                <div className="flex items-center">
+                  <RxAvatar />
+                  <div className="ml-4">
+                    <h3 className="text-lg font-semibold">
+                      {user.first_name} {user.last_name}
+                    </h3>
+                    <p className="text-gray-600">{user.email}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <AiOutlineEdit
+                    size={24}
+                    className="text-gray-600 hover:text-green-500 cursor-pointer"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      navigate(`/dashboard/patients/edit/${user.id}`);
+                    }}
+                  />
+                  <MdDeleteOutline
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      deletePatient(user.id);
+                    }}
+                    size={24}
+                    className="text-gray-600 hover:text-red-500 cursor-pointer ml-2"
+                  />
+                </div>
               </div>
+            ))
+          ) : (
+            <div>
+              <h3 className="text-lg font-semibold">No user found</h3>
+              <button onClick={() => setSearch("")} className="text-blue-500">
+                Reset search
+              </button>
             </div>
-            <div className="flex items-center gap-3">
-              <AiOutlineEdit
-                size={24}
-                className="text-gray-600 hover:text-green-500 cursor-pointer"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  navigate(`/dashboard/patients/edit/${user.id}`);
-                }}
-              />
-              <MdDeleteOutline
-                onClick={(e) => {
-                  e.stopPropagation();
-                  deletePatient(user.id);
-                }}
-                size={24}
-                className="text-gray-600 hover:text-red-500 cursor-pointer ml-2"
-              />
-            </div>
-          </div>
-        ))}
+          )
+        ) : (
+          <Loader />
+        )}
       </div>
     </div>
   );

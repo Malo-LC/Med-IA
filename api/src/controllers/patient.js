@@ -1,11 +1,18 @@
 const Patient = require("../models/patient");
 const Analysis = require("../models/analysis");
-
+const sequelize = require("sequelize");
 const router = require("express").Router();
 
 router.get("/", async (req, res) => {
   try {
-    const patients = await Patient.findAll();
+    const search = req.query.search || "";
+    const query = {};
+    if (search)
+      query.where = {
+        [sequelize.Op.or]: [{ first_name: { [sequelize.Op.like]: `%${search}%` } }, { last_name: { [sequelize.Op.like]: `%${search}%` } }],
+      };
+
+    const patients = await Patient.findAll(query);
     return res.status(200).json({ ok: true, data: patients });
   } catch (error) {
     console.log(error);
