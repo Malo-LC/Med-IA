@@ -93,6 +93,7 @@ router.post("/melanoma", async (req, res) => {
     // send image to python server
     const result = await axios.post("http://localhost:5000/predictMelanoma", { image }, { headers: { "Content-Type": "application/json" } });
     const data = result.data;
+    if (data === "error") return res.status(500).json({ error: "Error while processing image", ok: false });
 
     const userId = req?.session?.passport?.user;
     const saved = await saveAnalysisToDb("melanoma", data, image, userId, patientId);

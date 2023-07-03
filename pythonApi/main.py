@@ -2,6 +2,7 @@ import tensorflow as tf
 import base64
 from io import BytesIO
 from tensorflow.keras.preprocessing.image import img_to_array
+from tensorflow.keras.preprocessing.image import load_img
 from glob import glob
 from flask import Flask, request, jsonify
 from PIL import Image
@@ -84,27 +85,36 @@ def predictPneumonia():
 
 @app.route("/predictMelanoma", methods=["POST"])
 def predictMelanoma():
-    # Get the image file from the request
-    # Access the JSON body of the request
-    json_data = request.json
+    try:
+        # Get the image file from the request
+        # Access the JSON body of the request
+        json_data = request.json
 
-    # Access the desired property
-    base64Image = json_data.get("image")
-    image = convert_base64_to_image(base64Image)
-    image = image.convert("RGB")
-    image = image.resize((180, 180))
-    image = img_to_array(image)
-    image = image.reshape(1, 180, 180, 3)
-    image = image / 255.0
+        # Access the desired property
+        base64Image = json_data.get("image")
+        image = convert_base64_to_image(base64Image)
+        # image = image.convert("RGB")
+        # image = image.resize((180, 180))
+        # image = img_to_array(image)
+        # image = image.reshape(1, 180, 180, 3)
+        # image = image / 255.0
+        # convert image to an temp filepath*
+        image.save("temp.jpg")
+        image = "temp.jpg"
+        # load image
+        Test_image = load_img(image, target_size=(180, 180, 3))
 
-    # img = np.expand_dims(image, axis=0)
+        img = np.expand_dims(Test_image, axis=0)
 
-    result = modelMe.predict(image)
-    result = np.argmax(result)
+        result = modelMe.predict(img)
+        result = np.argmax(result)
 
-    response = classnames[result]
+        response = classnames[result]
 
-    return jsonify(response)
+        return jsonify(response)
+    except Exception as e:
+        print(e)
+        return jsonify("error")
 
 
 if __name__ == "__main__":
