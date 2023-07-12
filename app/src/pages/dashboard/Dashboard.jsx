@@ -35,7 +35,7 @@ function Dashboard() {
               <img src={item.image} alt="image" className="w-full " />
               <div className="">{moment(item.date).fromNow()}</div>
               <div className="">{item?.Patient?.first_name || "deleted"}</div>
-              <div className={`rounded-full p-2 text-center ${item.result ? "bg-red-500" : "bg-green-500"}`}>{item.result}</div>
+              <div className={`rounded-full p-2 text-center ${item.result !== "No Pneumonia" ? "bg-red-500" : "bg-green-500"}`}>{item.result}</div>
             </div>
           ))}
         </div>
@@ -51,11 +51,11 @@ function Dashboard() {
           <h1 className="font-bold">Agenda</h1>
 
           <ul className="font-bold">Today - {moment().format("dddd Do MMM")}</ul>
-          <li>12h : RDV Madame Mich</li>
-          <li>15h : RDV Monsieur Georges</li>
-          <li>16h : RDV Madame Thomas</li>
+          <li>12h : RDV Ms Mich</li>
+          <li>15h : RDV Mr Georges</li>
+          <li>16h : RDV Ms Thomas</li>
           <ul className="font-bold">Tomorrow - {moment().add(1, "day").format("dddd Do MMM")}</ul>
-          <li>Aucun événement à venir</li>
+          <div>Nothing to come</div>
         </div>
       </div>
     </div>

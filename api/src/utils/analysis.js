@@ -6,7 +6,7 @@ const saveAnalysisToDb = async (type, result, image, userId, patientId) => {
     if (!userId) return { error: "User not found, please reconnect" };
     const user = await User.findOne({ where: { id: userId } });
     if (!user) return { error: "User not found, please reconnect" };
-    result = type === "pneumonia" ? (result === "normal" ? "Normal" : "Pneumonia") : result;
+    result = type === "pneumonia" ? (result === "Normal" ? "No Pneumonia" : "Pneumonia") : result;
 
     await Analysis.create({
       type,
